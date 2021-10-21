@@ -16,7 +16,7 @@ import {
 } from "../../features/auth/authSlice";
 
 export const Auth: VFC = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLoginMode, setIsLoginMode] = useState(true);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const schema = yup.object({
@@ -31,7 +31,7 @@ export const Auth: VFC = () => {
   } = useForm<FormInput>({ resolver: yupResolver(schema) });
 
   const onSubmit: SubmitHandler<FormInput> = async (data) => {
-    if (isLogin) {
+    if (isLoginMode) {
       await dispatch(fetchAsyncLogin(data));
       await navigate("/");
     } else {
@@ -43,7 +43,7 @@ export const Auth: VFC = () => {
       }
     }
   };
-  const toggleIsLogin = () => setIsLogin(!isLogin);
+  const toggleIsLogin = () => setIsLoginMode(!isLoginMode);
 
   return (
     <>
@@ -86,7 +86,7 @@ export const Auth: VFC = () => {
                   color="blue.500"
                   onClick={toggleIsLogin}
                 >
-                  {isLogin ? "Login" : "SignUp"}
+                  {isLoginMode ? "Login" : "SignUp"}
                 </Text>
                 <Button
                   isLoading={isSubmitting}

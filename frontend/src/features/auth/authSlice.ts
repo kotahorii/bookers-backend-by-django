@@ -80,6 +80,9 @@ export const authSlice = createSlice({
         localStorage.setItem("localJWT", action.payload.access);
       }
     );
+    builder.addCase(fetchAsyncLogin.rejected, (state) => {
+      window.location.href = "login/";
+    });
   },
 });
 

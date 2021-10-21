@@ -1,4 +1,5 @@
-import { Route, Routes } from "react-router";
+import { useEffect } from "react";
+import { Route, Routes, useLocation } from "react-router";
 import { Auth } from "./components/pages/Auth";
 import { Books } from "./components/pages/Books";
 import { MainPage } from "./components/pages/MainPage";
@@ -7,6 +8,11 @@ import { UserList } from "./components/templates/auth/UserList";
 import { BookList } from "./components/templates/book/BookList";
 
 const App = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   return (
     <>
       <Routes>
