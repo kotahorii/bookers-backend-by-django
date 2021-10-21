@@ -8,8 +8,7 @@ import {
 } from "../../types/loginTypes";
 import axios from "axios";
 import { RootState } from "../../app/store";
-
-const apiUrl = process.env.REACT_APP_API_URL;
+import { apiUrl } from "../../url";
 
 export const fetchAsyncLogin = createAsyncThunk(
   "auth/post",

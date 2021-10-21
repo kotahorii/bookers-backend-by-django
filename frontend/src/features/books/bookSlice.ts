@@ -2,8 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { RootState } from "../../app/store";
 import { BookState, PostBook, ReadBook } from "../../types/bookTypes";
-
-const apiUrl = process.env.REACT_APP_API_URL;
+import { apiUrl } from "../../url";
 
 export const fetchAsyncNewBook = createAsyncThunk(
   "book/post",

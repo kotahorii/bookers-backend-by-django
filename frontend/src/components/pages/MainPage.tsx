@@ -10,7 +10,7 @@ export const MainPage: VFC = () => {
   useEffect(() => {
     const token = localStorage.getItem("localJWT");
     !token && navigate("login/");
-  }, []);
+  }, [navigate]);
 
   return (
     <>
