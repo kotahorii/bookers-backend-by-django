@@ -1,12 +1,20 @@
-import { Box, Flex, Heading, Stack, Text } from "@chakra-ui/layout";
+import { Heading, Stack, Text } from "@chakra-ui/layout";
 import { VFC } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import styles from "./Header.module.css";
 
 export const Header: VFC = () => {
   const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem("localJWT");
     navigate("login/");
+  };
+
+  const returnTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
   return (
     <>
@@ -19,8 +27,13 @@ export const Header: VFC = () => {
         borderBottom="solid 0.1px"
         borderColor="gray.400"
         color="gray.600"
+        className={styles.sticky}
+        bg="gray.50"
+        zIndex={2}
       >
-        <Heading mx="10">Bookers</Heading>
+        <Heading mx="10" cursor="pointer" onClick={returnTop}>
+          Bookers
+        </Heading>
         <Stack
           direction="row"
           justify="row"

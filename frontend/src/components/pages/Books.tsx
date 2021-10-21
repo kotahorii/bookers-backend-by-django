@@ -5,7 +5,6 @@ import { Outlet } from "react-router";
 export const Books: VFC = () => {
   return (
     <>
-      <Heading>Book</Heading>
       <Outlet />
     </>
   );

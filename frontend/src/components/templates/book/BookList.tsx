@@ -4,7 +4,9 @@ import { VFC } from "react";
 export const BookList: VFC = () => {
   return (
     <>
-      <Heading>BookList</Heading>
+      <Heading textAlign="center" color="gray.600">
+        BookList
+      </Heading>
     </>
   );
 };
