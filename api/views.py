@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 class CreateUserView(generics.CreateAPIView):
     serializer_class = UserSerializer
-    permission_class = (permissions.AllowAny,)
+    permission_classes = (permissions.AllowAny,)
 
 
 class ProfileViewSet(viewsets.ModelViewSet):

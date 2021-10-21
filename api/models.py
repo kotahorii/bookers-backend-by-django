@@ -10,7 +10,7 @@ def upload_avatar_path(instance, filename):
 
 def upload_book_path(instance, filename):
     ext = filename.split('.')[-1]
-    return '/'.join(['posts', str(instance.user_profile.id) + str('.') + str(ext)])
+    return '/'.join(['posts', str(instance.reader.id) + str('.') + str(ext)])
 
 
 class Profile(models.Model):

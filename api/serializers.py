@@ -19,7 +19,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ['id', 'user_profile', 'img', 'introduction']
-    extra_kwargs = {'user_profile': {'read_only': True}}
+        extra_kwargs = {'user_profile': {'read_only': True}}
 
 
 class BookSerializer(serializers.ModelSerializer):
@@ -34,4 +34,4 @@ class BookSerializer(serializers.ModelSerializer):
         model = Book
         fields = ['id', 'title', 'body', 'reader', 'reader_username',
                   'created_at', 'updated_at', 'book_image']
-    extra_kwargs = {'reader': {'read_only': True}}
+        extra_kwargs = {'reader': {'read_only': True}}
