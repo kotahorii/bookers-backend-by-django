@@ -31,8 +31,7 @@ export const SideBar: VFC = () => {
   const {
     register,
     handleSubmit,
-    setValue,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting },
   } = useForm<FormInputBook>({ resolver: yupResolver(schema) });
 
   const onSubmit: SubmitHandler<FormInputBook> = (data) => {};
