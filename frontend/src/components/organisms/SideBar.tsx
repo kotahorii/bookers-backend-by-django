@@ -10,7 +10,6 @@ import { BsFillImageFill } from "react-icons/bs";
 import * as yup from "yup";
 import { FormInputBook } from "../../types/bookTypes";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useDisclosure } from "@chakra-ui/react";
 
 export const SideBar: VFC = () => {
   const [file, setFile] = useState<File | null>(null);
