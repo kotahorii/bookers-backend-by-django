@@ -1,15 +1,16 @@
+import { VFC, useState, ChangeEvent } from "react";
 import { Avatar } from "@chakra-ui/avatar";
 import { Button } from "@chakra-ui/button";
 import Icon from "@chakra-ui/icon";
 import { Input } from "@chakra-ui/input";
 import { Heading, Stack, Text } from "@chakra-ui/layout";
-import { VFC, useState, ChangeEvent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { BsCardImage } from "react-icons/bs";
 import { BsFillImageFill } from "react-icons/bs";
 import * as yup from "yup";
 import { FormInputBook } from "../../types/bookTypes";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useDisclosure } from "@chakra-ui/react";
 
 export const SideBar: VFC = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -88,7 +89,7 @@ export const SideBar: VFC = () => {
                     color="gray.500"
                     _hover={{ color: "gray.600" }}
                   />
-                  <Text>{file?.name}</Text>
+                  <Text textAlign="center">{file?.name}</Text>
                 </Stack>
                 <Button
                   type="submit"

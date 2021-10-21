@@ -1,3 +1,4 @@
+import { Button } from "@chakra-ui/button";
 import { Heading, Stack, Text } from "@chakra-ui/layout";
 import { VFC } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -31,7 +32,13 @@ export const Header: VFC = () => {
         bg="gray.50"
         zIndex={2}
       >
-        <Heading mx="10" cursor="pointer" onClick={returnTop}>
+        <Heading
+          mx="10"
+          cursor="pointer"
+          onClick={returnTop}
+          color="gray.600"
+          _hover={{ color: "gray.700" }}
+        >
           Bookers
         </Heading>
         <Stack
@@ -39,22 +46,33 @@ export const Header: VFC = () => {
           justify="row"
           display={{ md: "flex", base: "none" }}
           pr="10"
-          spacing="8"
         >
-          <Text fontWeight="bold" color="gray.500">
+          <Button
+            fontWeight="bold"
+            color="gray.500"
+            bg="gray.50"
+            _hover={{ bg: "gray.100" }}
+          >
             <Link to="books/">Books</Link>
-          </Text>
-          <Text fontWeight="bold" color="gray.500">
+          </Button>
+          <Button
+            fontWeight="bold"
+            color="gray.500"
+            bg="gray.50"
+            _hover={{ bg: "gray.100" }}
+          >
             <Link to="users/">Users</Link>
-          </Text>
-          <Text
+          </Button>
+          <Button
             fontWeight="bold"
             color="gray.500"
             cursor="pointer"
+            bg="gray.50"
+            _hover={{ bg: "gray.100" }}
             onClick={logout}
           >
             Logout
-          </Text>
+          </Button>
         </Stack>
       </Stack>
     </>

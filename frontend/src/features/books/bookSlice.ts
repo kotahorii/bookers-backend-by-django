@@ -52,6 +52,8 @@ export const fetchAsyncUpdateBook = createAsyncThunk(
 );
 
 const initialState: BookState = {
+  isOpenEditedModal: false,
+  isOpenSelectedModal: false,
   editedBook: {
     id: "",
     title: "",
@@ -86,6 +88,18 @@ export const bookSlice = createSlice({
     resetSelectBook: (state) => {
       state.selectedBook = initialState.selectedBook;
     },
+    openEditedModal: (state) => {
+      state.isOpenEditedModal = true;
+    },
+    closeEditedModal: (state) => {
+      state.isOpenEditedModal = false;
+    },
+    openSelectedModal: (state) => {
+      state.isOpenSelectedModal = true;
+    },
+    closeSelectedModal: (state) => {
+      state.isOpenSelectedModal = false;
+    },
   },
 
   extraReducers: (builder) => {
@@ -103,7 +117,17 @@ export const {
   setSelectedBook,
   resetEditedBook,
   resetSelectBook,
+  openEditedModal,
+  openSelectedModal,
+  closeEditedModal,
+  closeSelectedModal,
 } = bookSlice.actions;
+
 export const selectEditedBook = (state: RootState) => state.book.editedBook;
 export const selectSelectedBook = (state: RootState) => state.book.selectedBook;
+export const selectIsOpenEditedModal = (state: RootState) =>
+  state.book.isOpenEditedModal;
+export const selectIsOpenSelectedModal = (state: RootState) =>
+  state.book.isOpenSelectedModal;
+
 export default bookSlice.reducer;

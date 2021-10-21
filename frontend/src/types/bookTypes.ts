@@ -19,6 +19,8 @@ export type ReadBook = {
   reader_username: string;
 };
 export type BookState = {
+  isOpenEditedModal: boolean;
+  isOpenSelectedModal: boolean;
   editedBook: PostBook;
   selectedBook: ReadBook;
 };
