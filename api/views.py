@@ -1,7 +1,6 @@
 from rest_framework import status, permissions, generics, viewsets
 from .models import Profile, Book
 from .serializers import UserSerializer, ProfileSerializer, BookSerializer
-from django.contrib.auth.models import User
 from . import custompermissions
 
 
