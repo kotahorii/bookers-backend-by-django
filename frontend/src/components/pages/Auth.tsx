@@ -33,13 +33,13 @@ export const Auth: VFC = () => {
   const onSubmit: SubmitHandler<FormInput> = async (data) => {
     if (isLogin) {
       await dispatch(fetchAsyncLogin(data));
-      await navigate("books/");
+      await navigate("/");
     } else {
       const res = await dispatch(fetchAsyncRegister(data));
       if (fetchAsyncRegister.fulfilled.match(res)) {
         await dispatch(fetchAsyncLogin(data));
         await dispatch(fetchAsyncCreateProf());
-        await navigate("books/");
+        await navigate("/");
       }
     }
   };
@@ -58,7 +58,11 @@ export const Auth: VFC = () => {
           p="6"
           my="12"
         >
-          <Heading lineHeight="1.1" fontSize={{ base: "2xl", md: "3xl" }}>
+          <Heading
+            textAlign="center"
+            lineHeight="1.1"
+            fontSize={{ base: "2xl", md: "3xl" }}
+          >
             Enter new password
           </Heading>
           <form onSubmit={handleSubmit(onSubmit)}>
