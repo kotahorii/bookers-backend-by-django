@@ -25,3 +25,7 @@ export type Profile = {
   img: string | null;
   introduction: string | null;
 };
+export type AuthState = {
+  editedProf: PostProf;
+  selectedProf: Profile;
+};

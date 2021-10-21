@@ -2,7 +2,7 @@ import { Avatar } from "@chakra-ui/avatar";
 import { Button } from "@chakra-ui/button";
 import Icon from "@chakra-ui/icon";
 import { Input } from "@chakra-ui/input";
-import { Flex, Heading, Stack, Text } from "@chakra-ui/layout";
+import { Heading, Stack, Text } from "@chakra-ui/layout";
 import { VFC, useState, ChangeEvent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { BsCardImage } from "react-icons/bs";
@@ -10,7 +10,6 @@ import { BsFillImageFill } from "react-icons/bs";
 import * as yup from "yup";
 import { FormInputBook } from "../../types/bookTypes";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { SSL_OP_NETSCAPE_DEMO_CIPHER_CHANGE_BUG } from "constants";
 
 export const SideBar: VFC = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -66,9 +65,13 @@ export const SideBar: VFC = () => {
             </Button>
           </Stack>
           <Stack spacing="5" py="5">
-            <Input variant="flushed" placeholder="Title" />
-            <Input variant="flushed" placeholder="Body" />
-            <form>
+            <Input
+              variant="flushed"
+              placeholder="Title"
+              {...register("title")}
+            />
+            <Input variant="flushed" placeholder="Body" {...register("body")} />
+            <form onSubmit={handleSubmit(onSubmit)}>
               <Stack>
                 <Stack direction="row" mb="3">
                   <input
@@ -88,7 +91,13 @@ export const SideBar: VFC = () => {
                   />
                   <Text>{file?.name}</Text>
                 </Stack>
-                <Button color="white" bg="blue.400" _hover={{ bg: "blue.500" }}>
+                <Button
+                  type="submit"
+                  isLoading={isSubmitting}
+                  color="white"
+                  bg="blue.400"
+                  _hover={{ bg: "blue.500" }}
+                >
                   Create
                 </Button>
               </Stack>

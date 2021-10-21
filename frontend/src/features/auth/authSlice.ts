@@ -1,6 +1,13 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Cred, JWT, PostProf, Profile } from "../../types/loginTypes";
+import {
+  AuthState,
+  Cred,
+  JWT,
+  PostProf,
+  Profile,
+} from "../../types/loginTypes";
 import axios from "axios";
+import { RootState } from "../../app/store";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -66,12 +73,37 @@ export const fetchAsyncUpdateProf = createAsyncThunk(
   }
 );
 
-const initialState = {};
+const initialState: AuthState = {
+  editedProf: {
+    id: "",
+    img: null,
+    introduction: "",
+  },
+  selectedProf: {
+    id: "",
+    img: null,
+    introduction: "",
+    user_profile: 0,
+  },
+};
 
 export const authSlice = createSlice({
-  name: "counter",
+  name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    setEditProf: (state, action: PayloadAction<PostProf>) => {
+      state.editedProf = action.payload;
+    },
+    resetEditProf: (state) => {
+      state.editedProf = initialState.editedProf;
+    },
+    setSelectedProf: (state, action: PayloadAction<Profile>) => {
+      state.selectedProf = action.payload;
+    },
+    resetSelectedProf: (state) => {
+      state.selectedProf = initialState.selectedProf;
+    },
+  },
 
   extraReducers: (builder) => {
     builder.addCase(
@@ -86,4 +118,12 @@ export const authSlice = createSlice({
   },
 });
 
+export const {
+  setEditProf,
+  setSelectedProf,
+  resetEditProf,
+  resetSelectedProf,
+} = authSlice.actions;
+export const selectEditedProf = (state: RootState) => state.auth.editedProf;
+export const selectSelectedProf = (state: RootState) => state.auth.selectedProf;
 export default authSlice.reducer;
