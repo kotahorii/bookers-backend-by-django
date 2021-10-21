@@ -21,7 +21,7 @@ class Profile(models.Model):
     )
     img = models.ImageField(blank=True, null=True,
                             upload_to=upload_avatar_path)
-    introduction = models.CharField(max_length=140)
+    introduction = models.CharField(max_length=140, blank=True, null=True)
 
     def __str__(self):
         return self.user_profile.username
@@ -30,7 +30,7 @@ class Profile(models.Model):
 class Book(models.Model):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
     title = models.CharField(max_length=50)
-    body = models.CharField(max_length=140)
+    body = models.CharField(max_length=140, null=True, blank=True)
     reader = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='reader')
     created_at = models.DateTimeField(auto_now_add=True)
