@@ -27,7 +27,7 @@ export const Auth: VFC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
   } = useForm<FormInput>({ resolver: yupResolver(schema) });
 
   const onSubmit: SubmitHandler<FormInput> = async (data) => {
