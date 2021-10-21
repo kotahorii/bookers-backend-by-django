@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useMutation, useQueryClient } from "react-query";
+import { useNavigate } from "react-router";
 import { ReadBook } from "../../types/bookTypes";
 import { apiUrl } from "../../url";
 
 export const useMutationBooks = () => {
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const deleteTaskMutation = useMutation(
@@ -23,6 +25,9 @@ export const useMutationBooks = () => {
             previousBooks.filter((book) => book.id !== variables)
           );
         }
+      },
+      onError: () => {
+        navigate("login/");
       },
     }
   );
