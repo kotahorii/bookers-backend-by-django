@@ -14,6 +14,7 @@ import { useAppDispatch } from "../../app/hooks";
 import { setIsOpenEditModal } from "../../features/auth/authSlice";
 import { EditProfModal } from "./EditProfModal";
 import { useQueryMyProf } from "../../hooks/auth/useQueryMyProf";
+import { fetchAsyncNewBook } from "../../features/books/bookSlice";
 
 export const SideBar: VFC = memo(() => {
   const [file, setFile] = useState<File | null>(null);
@@ -37,14 +38,26 @@ export const SideBar: VFC = memo(() => {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting },
+    setValue,
+    formState: { isSubmitting, errors },
   } = useForm<FormInputBook>({ resolver: yupResolver(schema) });
 
   const openEditProfModal = () => {
     dispatch(setIsOpenEditModal());
   };
 
-  const onSubmit: SubmitHandler<FormInputBook> = (data) => {};
+  const onSubmit: SubmitHandler<FormInputBook> = (data) => {
+    dispatch(
+      fetchAsyncNewBook({
+        title: data.title,
+        body: data.body,
+        book_image: file,
+      })
+    );
+    setValue("title", "");
+    setValue("body", "");
+    setFile(null);
+  };
 
   return (
     <>
@@ -84,7 +97,9 @@ export const SideBar: VFC = memo(() => {
               placeholder="Title"
               {...register("title")}
             />
+            <Text color="pink.400">{errors.title?.message}</Text>
             <Input variant="flushed" placeholder="Body" {...register("body")} />
+            <Text color="pink.400">{errors.body?.message}</Text>
             <form onSubmit={handleSubmit(onSubmit)}>
               <Stack>
                 <Stack direction="row" mb="3">

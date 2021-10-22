@@ -6,7 +6,7 @@ import { apiUrl } from "../../url";
 
 export const fetchAsyncNewBook = createAsyncThunk(
   "book/post",
-  async (newBook: PostBook) => {
+  async (newBook: Omit<PostBook, "id">) => {
     const uploadData = new FormData();
     uploadData.append("title", newBook.title);
     newBook.body && uploadData.append("body", newBook.body);

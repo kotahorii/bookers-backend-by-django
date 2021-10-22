@@ -27,7 +27,7 @@ export const Auth: VFC = memo(() => {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting },
+    formState: { isSubmitting, errors },
   } = useForm<FormInput>({ resolver: yupResolver(schema) });
 
   const onSubmit: SubmitHandler<FormInput> = async (data) => {
@@ -70,6 +70,7 @@ export const Auth: VFC = memo(() => {
               <FormControl>
                 <FormLabel>Username</FormLabel>
                 <Input variant="flushed" {...register("username")} />
+                <Text color="pink.400">{errors.username?.message}</Text>
               </FormControl>
               <FormControl>
                 <FormLabel>Password</FormLabel>
@@ -78,6 +79,7 @@ export const Auth: VFC = memo(() => {
                   type="password"
                   {...register("password")}
                 />
+                <Text color="pink.400">{errors.password?.message}</Text>
               </FormControl>
               <Stack spacing="5" py="5">
                 <Text
