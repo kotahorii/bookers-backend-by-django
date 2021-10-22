@@ -28,6 +28,7 @@ import {
   RefetchQueryFilters,
 } from "react-query";
 import { Profile } from "../../types/loginTypes";
+import { useNavigate } from "react-router";
 
 type Props = {
   refetch: <TPageData>(
@@ -36,6 +37,7 @@ type Props = {
 };
 
 export const EditProfModal: VFC<Props> = memo(({ refetch }) => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const editedProf = useAppSelector(selectEditedProf);
   const isOpenProfEditModal = useAppSelector(selectIsOpenProfEditModal);
@@ -50,19 +52,21 @@ export const EditProfModal: VFC<Props> = memo(({ refetch }) => {
     setProfImg(e.target.files![0]);
   };
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(
+    const res = await dispatch(
       fetchAsyncUpdateProf({
         id: editedProf.id,
         img: profImg,
         introduction: editedProf.introduction,
       })
     );
-    dispatch(resetEditProf());
-    setProfImg(null);
-    dispatch(resetIsOpenEditModal());
-    refetch();
+    if (fetchAsyncUpdateProf.fulfilled.match(res)) {
+      dispatch(resetEditProf());
+      setProfImg(null);
+      dispatch(resetIsOpenEditModal());
+      refetch();
+    }
   };
 
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
