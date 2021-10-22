@@ -10,9 +10,15 @@ import { BsFillImageFill } from "react-icons/bs";
 import * as yup from "yup";
 import { FormInputBook } from "../../types/bookTypes";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useAppDispatch } from "../../app/hooks";
+import { setIsOpenEditModal } from "../../features/auth/authSlice";
+import { EditProfModal } from "./EditProfModal";
+import { useQueryMyProf } from "../../hooks/auth/useQueryMyProf";
 
 export const SideBar: VFC = memo(() => {
   const [file, setFile] = useState<File | null>(null);
+  const { data: myprof } = useQueryMyProf();
+  const dispatch = useAppDispatch();
 
   const handlerInputPicture = () => {
     const fileInput = document.getElementById("imageInput");
@@ -34,6 +40,10 @@ export const SideBar: VFC = memo(() => {
     formState: { isSubmitting },
   } = useForm<FormInputBook>({ resolver: yupResolver(schema) });
 
+  const openEditProfModal = () => {
+    dispatch(setIsOpenEditModal());
+  };
+
   const onSubmit: SubmitHandler<FormInputBook> = (data) => {};
 
   return (
@@ -51,15 +61,20 @@ export const SideBar: VFC = memo(() => {
               color="gray.600"
               maxW="300px"
             >
-              takashi
+              {myprof?.user_profile_username}
             </Text>
           </Stack>
           <Stack spacing="3">
             <Text fontSize="18px">Introduction:</Text>
             <Text maxW="300px" fontSize="18px">
-              aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+              {myprof?.introduction}
             </Text>
-            <Button color="white" bg="gray.300" _hover={{ bg: "gray.400" }}>
+            <Button
+              onClick={openEditProfModal}
+              color="white"
+              bg="gray.300"
+              _hover={{ bg: "gray.400" }}
+            >
               Edit Prof
             </Button>
           </Stack>
@@ -104,6 +119,7 @@ export const SideBar: VFC = memo(() => {
           </Stack>
         </Stack>
       </Stack>
+      <EditProfModal />
     </>
   );
 });

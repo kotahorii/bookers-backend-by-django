@@ -22,10 +22,15 @@ export type PostProf = {
 export type Profile = {
   id: string;
   user_profile: number;
+  user_profile_username: string;
   img: string | null;
   introduction: string | null;
 };
+export type FormInputProf = {
+  introduction: string;
+};
 export type AuthState = {
+  isOpenEditProfModal: boolean;
   editedProf: PostProf;
   selectedProf: Profile;
 };

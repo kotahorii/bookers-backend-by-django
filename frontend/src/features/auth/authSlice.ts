@@ -73,6 +73,7 @@ export const fetchAsyncUpdateProf = createAsyncThunk(
 );
 
 const initialState: AuthState = {
+  isOpenEditProfModal: false,
   editedProf: {
     id: "",
     img: null,
@@ -83,6 +84,7 @@ const initialState: AuthState = {
     img: null,
     introduction: "",
     user_profile: 0,
+    user_profile_username: "",
   },
 };
 
@@ -101,6 +103,12 @@ export const authSlice = createSlice({
     },
     resetSelectedProf: (state) => {
       state.selectedProf = initialState.selectedProf;
+    },
+    setIsOpenEditModal: (state) => {
+      state.isOpenEditProfModal = true;
+    },
+    resetIsOpenEditModal: (state) => {
+      state.isOpenEditProfModal = false;
     },
   },
 
@@ -122,7 +130,11 @@ export const {
   setSelectedProf,
   resetEditProf,
   resetSelectedProf,
+  setIsOpenEditModal,
+  resetIsOpenEditModal,
 } = authSlice.actions;
 export const selectEditedProf = (state: RootState) => state.auth.editedProf;
 export const selectSelectedProf = (state: RootState) => state.auth.selectedProf;
+export const selectIsOpenProfEditModal = (state: RootState) =>
+  state.auth.isOpenEditProfModal;
 export default authSlice.reducer;

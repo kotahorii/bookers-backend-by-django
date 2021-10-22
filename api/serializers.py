@@ -16,9 +16,14 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ProfileSerializer(serializers.ModelSerializer):
+    user_profile_username = serializers.ReadOnlyField(
+        source='user_profile.username', read_only=True
+    )
+
     class Meta:
         model = Profile
-        fields = ['id', 'user_profile', 'img', 'introduction']
+        fields = ['id', 'user_profile', 'img',
+                  'introduction', 'user_profile_username']
         extra_kwargs = {'user_profile': {'read_only': True}}
 
 
