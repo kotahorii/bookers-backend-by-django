@@ -8,7 +8,7 @@ export const useMutationBooks = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const deleteTaskMutation = useMutation(
+  const deleteBookMutation = useMutation(
     (id: string) =>
       axios.delete(`${apiUrl}api/book/${id}`, {
         headers: {
@@ -31,5 +31,5 @@ export const useMutationBooks = () => {
       },
     }
   );
-  return { deleteTaskMutation };
+  return { deleteBookMutation };
 };

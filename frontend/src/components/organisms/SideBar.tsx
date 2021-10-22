@@ -16,13 +16,17 @@ import { EditProfModal } from "./EditProfModal";
 import { useQueryMyProf } from "../../hooks/auth/useQueryMyProf";
 import { fetchAsyncNewBook } from "../../features/books/bookSlice";
 import { useToast } from "@chakra-ui/toast";
+import { useNavigate } from "react-router";
+import { useQueryProfs } from "../../hooks/auth/useQueryProfs";
+import { useQueryBooks } from "../../hooks/book/useQueryBooks";
 
 export const SideBar: VFC = memo(() => {
   const [file, setFile] = useState<File | null>(null);
+  const navigate = useNavigate();
   const { data: myprof, refetch } = useQueryMyProf();
+  const { refetch: refetchBooks } = useQueryBooks();
   const dispatch = useAppDispatch();
   const toast = useToast();
-
   const handlerInputPicture = () => {
     const fileInput = document.getElementById("imageInput");
     fileInput?.click();
@@ -57,24 +61,28 @@ export const SideBar: VFC = memo(() => {
     }
   };
 
-  const onSubmit: SubmitHandler<FormInputBook> = (data) => {
-    dispatch(
+  const onSubmit: SubmitHandler<FormInputBook> = async (data) => {
+    const res = await dispatch(
       fetchAsyncNewBook({
         title: data.title,
         body: data.body,
         book_image: file,
       })
     );
-    toast({
-      title: "NewBook created.",
-      description: "Success to create new book",
-      status: "success",
-      duration: 9000,
-      isClosable: true,
-    });
-    setValue("title", "");
-    setValue("body", "");
-    setFile(null);
+    if (fetchAsyncNewBook.fulfilled.match(res)) {
+      toast({
+        title: "NewBook created.",
+        description: "Success to create new book",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+      setValue("title", "");
+      setValue("body", "");
+      setFile(null);
+      navigate("books");
+      refetchBooks();
+    }
   };
 
   return (

@@ -6,18 +6,23 @@ import { useNavigate } from "react-router";
 import { useAppDispatch } from "../../app/hooks";
 import { setId } from "../../features/idSlice";
 import { useQueryMyProf } from "../../hooks/auth/useQueryMyProf";
+import { useMutationBooks } from "../../hooks/book/useMutateBooks";
 import { ReadBook } from "../../types/bookTypes";
 
 type Props = {
   book: ReadBook;
 };
 export const BookCard: VFC<Props> = ({ book }) => {
+  const { deleteBookMutation } = useMutationBooks();
   const { data: myprof } = useQueryMyProf();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const onClickUsername = () => {
     dispatch(setId(book.reader));
     navigate(`/books/${book.reader}`);
+  };
+  const deleteBook = () => {
+    deleteBookMutation.mutate(book.id);
   };
   return (
     <>
@@ -41,11 +46,15 @@ export const BookCard: VFC<Props> = ({ book }) => {
             <Stack justify="space-between" maxW="50%" minW="50%">
               <Text>Body: {book.body}</Text>
               {myprof?.user_profile === book.reader && (
-                <Flex directin="row">
+                <Flex direction="row">
                   <Button bg="transparent" _hover={{ bg: "gray.50" }}>
                     Edit
                   </Button>
-                  <Button bg="transparent" _hover={{ bg: "gray.50" }}>
+                  <Button
+                    bg="transparent"
+                    _hover={{ bg: "gray.50" }}
+                    onClick={deleteBook}
+                  >
                     Delete
                   </Button>
                 </Flex>
