@@ -29,7 +29,7 @@ export const Header: VFC = memo(() => {
         borderColor="gray.400"
         color="gray.600"
         className={styles.sticky}
-        bg="gray.50"
+        bg="transparent"
         zIndex={2}
       >
         <Heading
@@ -50,7 +50,7 @@ export const Header: VFC = memo(() => {
           <Button
             fontWeight="bold"
             color="gray.500"
-            bg="gray.50"
+            bg="transparent"
             _hover={{ bg: "gray.100" }}
           >
             <Link to="books/">Books</Link>
@@ -58,7 +58,7 @@ export const Header: VFC = memo(() => {
           <Button
             fontWeight="bold"
             color="gray.500"
-            bg="gray.50"
+            bg="transparent"
             _hover={{ bg: "gray.100" }}
           >
             <Link to="users/">Users</Link>
@@ -67,7 +67,7 @@ export const Header: VFC = memo(() => {
             fontWeight="bold"
             color="gray.500"
             cursor="pointer"
-            bg="gray.50"
+            bg="transparent"
             _hover={{ bg: "gray.100" }}
             onClick={logout}
           >

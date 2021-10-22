@@ -64,7 +64,7 @@ const initialState: BookState = {
     id: "",
     title: "",
     body: "",
-    book_image: null,
+    book_image: undefined,
     created_at: "",
     updated_at: "",
     reader: 0,

@@ -12,7 +12,7 @@ export type ReadBook = {
   id: string;
   title: string;
   body: string;
-  book_image: File | null;
+  book_image: string | undefined;
   created_at: string;
   updated_at: string;
   reader: number;
