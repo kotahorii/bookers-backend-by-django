@@ -76,7 +76,16 @@ export const SideBar: VFC = memo(() => {
           User
         </Heading>
         <Stack px="5">
-          <Stack direction="row" align="center" spacing="5" maxW="300px">
+          <Stack
+            cursor="pointer"
+            _hover={{ bg: "gray.100" }}
+            direction="row"
+            align="center"
+            spacing="5"
+            maxW="300px"
+            borderRadius="lg"
+            p="2"
+          >
             <Avatar src={myprof?.img} />
             <Text
               fontSize="20px"

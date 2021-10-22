@@ -52,6 +52,7 @@ export const Header: VFC = memo(() => {
             color="gray.500"
             bg="transparent"
             _hover={{ bg: "gray.100" }}
+            _focus={{ boxShadow: "none" }}
           >
             <Link to="books/">Books</Link>
           </Button>
@@ -60,6 +61,7 @@ export const Header: VFC = memo(() => {
             color="gray.500"
             bg="transparent"
             _hover={{ bg: "gray.100" }}
+            _focus={{ boxShadow: "none" }}
           >
             <Link to="users/">Users</Link>
           </Button>
@@ -69,6 +71,7 @@ export const Header: VFC = memo(() => {
             cursor="pointer"
             bg="transparent"
             _hover={{ bg: "gray.100" }}
+            _focus={{ boxShadow: "none" }}
             onClick={logout}
           >
             Logout

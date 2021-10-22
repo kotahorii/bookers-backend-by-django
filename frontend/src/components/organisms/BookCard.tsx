@@ -2,12 +2,22 @@ import { Button } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
 import { Box, Stack, Text } from "@chakra-ui/layout";
 import { VFC } from "react";
+import { useNavigate } from "react-router";
+import { useAppDispatch } from "../../app/hooks";
+import { setSelectedProf } from "../../features/auth/authSlice";
+import { setSelectedBook } from "../../features/books/bookSlice";
 import { ReadBook } from "../../types/bookTypes";
 
 type Props = {
   book: ReadBook;
 };
 export const BookCard: VFC<Props> = ({ book }) => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const onClickUsername = () => {
+    dispatch(setSelectedBook(book));
+    navigate(`/users/${book.reader}`);
+  };
   return (
     <>
       <Box
@@ -18,7 +28,6 @@ export const BookCard: VFC<Props> = ({ book }) => {
         p="3"
       >
         <Stack>
-          <Stack direction="row"></Stack>
           <Text
             color="gray.600"
             fontWeight="bold"
@@ -46,7 +55,9 @@ export const BookCard: VFC<Props> = ({ book }) => {
                 color="gray.600"
                 bg="transparent"
                 _hover={{ bg: "gray.50" }}
+                _focus={{ boxShadow: "none" }}
                 size="xs"
+                onClick={onClickUsername}
               >
                 Username: {book.reader_username}
               </Button>
