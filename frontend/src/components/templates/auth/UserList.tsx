@@ -1,9 +1,12 @@
 import { Heading, Stack } from "@chakra-ui/layout";
 import { VFC, memo } from "react";
 import { Outlet } from "react-router";
+import { useQueryProfs } from "../../../hooks/auth/useQueryProfs";
+import { ProfCard } from "../../organisms/ProfCard";
 import { SideBar } from "../../organisms/SideBar";
 
 export const UserList: VFC = memo(() => {
+  const { data: profs } = useQueryProfs();
   return (
     <>
       <SideBar />
@@ -11,7 +14,9 @@ export const UserList: VFC = memo(() => {
         <Heading textAlign="center" color="gray.600">
           UserList
         </Heading>
-        <Outlet />
+        {profs?.map((prof) => (
+          <ProfCard key={prof.id} prof={prof} />
+        ))}
       </Stack>
     </>
   );

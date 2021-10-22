@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router";
-import { AllUsers } from "./components/organisms/AllUsers";
+import { AllBook } from "./components/organisms/AllBook";
 import { SelectedUser } from "./components/organisms/SelectedUser";
 import { Auth } from "./components/pages/Auth";
 import { MainPage } from "./components/pages/MainPage";
@@ -18,11 +18,11 @@ const App = () => {
       <Routes>
         <Route path="login" element={<Auth />} />
         <Route path="/" element={<MainPage />}>
-          <Route path="books" element={<BookList />} />
-          <Route path="users" element={<UserList />}>
-            <Route path="" element={<AllUsers />} />
+          <Route path="books" element={<BookList />}>
+            <Route path="" element={<AllBook />} />
             <Route path=":id" element={<SelectedUser />} />
           </Route>
+          <Route path="users" element={<UserList />} />
         </Route>
       </Routes>
     </>

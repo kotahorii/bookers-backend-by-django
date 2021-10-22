@@ -1,11 +1,10 @@
-import { Flex, Heading, Stack } from "@chakra-ui/layout";
+import { Heading, Stack } from "@chakra-ui/layout";
 import { VFC, memo } from "react";
-import { useQueryBooks } from "../../../hooks/book/useQueryBooks";
-import { BookCard } from "../../organisms/BookCard";
+import { Outlet } from "react-router";
+
 import { SideBar } from "../../organisms/SideBar";
 
 export const BookList: VFC = memo(() => {
-  const { data: books } = useQueryBooks();
   return (
     <>
       <SideBar />
@@ -13,9 +12,7 @@ export const BookList: VFC = memo(() => {
         <Heading textAlign="center" color="gray.600">
           BookList
         </Heading>
-        {books?.map((book) => (
-          <BookCard key={book.id} book={book} />
-        ))}
+        <Outlet />
       </Stack>
     </>
   );

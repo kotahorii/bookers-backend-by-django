@@ -4,7 +4,6 @@ import { Box, Stack, Text } from "@chakra-ui/layout";
 import { VFC } from "react";
 import { useNavigate } from "react-router";
 import { useAppDispatch } from "../../app/hooks";
-import { setSelectedProf } from "../../features/auth/authSlice";
 import { setSelectedBook } from "../../features/books/bookSlice";
 import { ReadBook } from "../../types/bookTypes";
 
@@ -16,7 +15,7 @@ export const BookCard: VFC<Props> = ({ book }) => {
   const navigate = useNavigate();
   const onClickUsername = () => {
     dispatch(setSelectedBook(book));
-    navigate(`/users/${book.reader}`);
+    navigate(`/books/${book.reader}`);
   };
   return (
     <>
