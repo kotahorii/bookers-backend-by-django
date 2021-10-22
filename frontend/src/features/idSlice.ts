@@ -20,6 +20,6 @@ export const idSlice = createSlice({
 
 export const { setId, resetId } = idSlice.actions;
 
-export const selectId = (state: RootState) => state.id;
+export const selectId = (state: RootState) => state.id.id;
 
 export default idSlice.reducer;

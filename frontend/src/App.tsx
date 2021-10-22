@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router";
 import { AllBook } from "./components/organisms/AllBook";
-import { SelectedUser } from "./components/organisms/SelectedUser";
+import { SelectedUsersBook } from "./components/organisms/SelectedUsersBook";
 import { Auth } from "./components/pages/Auth";
 import { MainPage } from "./components/pages/MainPage";
 import { UserList } from "./components/templates/auth/UserList";
@@ -20,7 +20,7 @@ const App = () => {
         <Route path="/" element={<MainPage />}>
           <Route path="books" element={<BookList />}>
             <Route path="" element={<AllBook />} />
-            <Route path=":id" element={<SelectedUser />} />
+            <Route path=":id" element={<SelectedUsersBook />} />
           </Route>
           <Route path="users" element={<UserList />} />
         </Route>
