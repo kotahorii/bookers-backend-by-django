@@ -28,6 +28,7 @@ import {
   RefetchQueryFilters,
 } from "react-query";
 import { Profile } from "../../types/loginTypes";
+import { useToast } from "@chakra-ui/react";
 
 type Props = {
   refetch: <TPageData>(
@@ -40,6 +41,7 @@ export const EditProfModal: VFC<Props> = memo(({ refetch }) => {
   const editedProf = useAppSelector(selectEditedProf);
   const isOpenProfEditModal = useAppSelector(selectIsOpenProfEditModal);
   const [profImg, setProfImg] = useState<File | null>(null);
+  const toast = useToast();
 
   const handlerInputProf = () => {
     const fileInput = document.getElementById("profImgInput");
@@ -64,6 +66,13 @@ export const EditProfModal: VFC<Props> = memo(({ refetch }) => {
       setProfImg(null);
       dispatch(resetIsOpenEditModal());
       refetch();
+      toast({
+        title: "Profile Updated.",
+        description: "Success to Create your Profile",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
     }
   };
 

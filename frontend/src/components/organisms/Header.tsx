@@ -3,7 +3,6 @@ import { Button } from "@chakra-ui/button";
 import { Heading, Stack } from "@chakra-ui/layout";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
-
 export const Header: VFC = memo(() => {
   const navigate = useNavigate();
   const logout = () => {
@@ -17,6 +16,8 @@ export const Header: VFC = memo(() => {
       behavior: "smooth",
     });
   };
+
+  const onClickList = () => {};
   return (
     <>
       <Stack
@@ -48,6 +49,7 @@ export const Header: VFC = memo(() => {
           pr="10"
         >
           <Button
+            onClick={onClickList}
             fontWeight="bold"
             color="gray.500"
             bg="transparent"
@@ -57,6 +59,7 @@ export const Header: VFC = memo(() => {
             <Link to="books/">Books</Link>
           </Button>
           <Button
+            onClick={onClickList}
             fontWeight="bold"
             color="gray.500"
             bg="transparent"

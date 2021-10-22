@@ -2,6 +2,7 @@ import { VFC, memo, useEffect } from "react";
 import { Header } from "../organisms/Header";
 import { Container, Flex } from "@chakra-ui/layout";
 import { Outlet, useNavigate } from "react-router";
+import { SideBar } from "../organisms/SideBar";
 
 export const MainPage: VFC = memo(() => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ export const MainPage: VFC = memo(() => {
         <Header />
         <Container maxW="7xl" p="0">
           <Flex direction={{ base: "column", md: "row" }} pt="5">
+            <SideBar />
             <Flex flex={2} w="full" justify="center">
               <Outlet />
             </Flex>

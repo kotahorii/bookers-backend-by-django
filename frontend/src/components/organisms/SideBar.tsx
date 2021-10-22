@@ -15,11 +15,13 @@ import { setEditProf, setIsOpenEditModal } from "../../features/auth/authSlice";
 import { EditProfModal } from "./EditProfModal";
 import { useQueryMyProf } from "../../hooks/auth/useQueryMyProf";
 import { fetchAsyncNewBook } from "../../features/books/bookSlice";
+import { useToast } from "@chakra-ui/toast";
 
 export const SideBar: VFC = memo(() => {
   const [file, setFile] = useState<File | null>(null);
   const { data: myprof, refetch } = useQueryMyProf();
   const dispatch = useAppDispatch();
+  const toast = useToast();
 
   const handlerInputPicture = () => {
     const fileInput = document.getElementById("imageInput");
@@ -63,7 +65,13 @@ export const SideBar: VFC = memo(() => {
         book_image: file,
       })
     );
-    refetch();
+    toast({
+      title: "NewBook created.",
+      description: "Success to create new book",
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+    });
     setValue("title", "");
     setValue("body", "");
     setFile(null);

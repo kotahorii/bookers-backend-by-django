@@ -1,16 +1,18 @@
 import { Button } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
-import { Box, Stack, Text } from "@chakra-ui/layout";
+import { Box, Flex, Stack, Text } from "@chakra-ui/layout";
 import { VFC } from "react";
 import { useNavigate } from "react-router";
 import { useAppDispatch } from "../../app/hooks";
 import { setId } from "../../features/idSlice";
+import { useQueryMyProf } from "../../hooks/auth/useQueryMyProf";
 import { ReadBook } from "../../types/bookTypes";
 
 type Props = {
   book: ReadBook;
 };
 export const BookCard: VFC<Props> = ({ book }) => {
+  const { data: myprof } = useQueryMyProf();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const onClickUsername = () => {
@@ -36,9 +38,20 @@ export const BookCard: VFC<Props> = ({ book }) => {
             Title: {book.title}
           </Text>
           <Stack direction="row" justify="center">
-            <Text maxW="50%" minW="50%">
-              Body: {book.body}
-            </Text>
+            <Stack justify="space-between" maxW="50%" minW="50%">
+              <Text>Body: {book.body}</Text>
+              {myprof?.user_profile === book.reader && (
+                <Flex directin="row">
+                  <Button bg="transparent" _hover={{ bg: "gray.50" }}>
+                    Edit
+                  </Button>
+                  <Button bg="transparent" _hover={{ bg: "gray.50" }}>
+                    Delete
+                  </Button>
+                </Flex>
+              )}
+            </Stack>
+
             <Stack spacing="0.5">
               <Image
                 src={book.book_image}
