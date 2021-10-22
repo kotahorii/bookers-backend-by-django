@@ -29,7 +29,7 @@ export const Header: VFC = memo(() => {
         borderColor="gray.400"
         color="gray.600"
         className={styles.sticky}
-        bg="transparent"
+        bg="gray.50"
         zIndex={2}
       >
         <Heading

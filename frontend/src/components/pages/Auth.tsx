@@ -63,7 +63,7 @@ export const Auth: VFC = memo(() => {
             lineHeight="1.1"
             fontSize={{ base: "2xl", md: "3xl" }}
           >
-            Enter new password
+            Enjoy this App
           </Heading>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Stack>
@@ -96,6 +96,7 @@ export const Auth: VFC = memo(() => {
                   bg="blue.400"
                   color="white"
                   _hover={{ bg: "blue.500" }}
+                  boxShadow="md"
                 >
                   Submit
                 </Button>

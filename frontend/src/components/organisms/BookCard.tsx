@@ -10,7 +10,13 @@ type Props = {
 export const BookCard: VFC<Props> = ({ book }) => {
   return (
     <>
-      <Box w="60%" h="220px" bg="white" borderRadius="lg" boxShadow="md" p="3">
+      <Box
+        w={{ md: "60%", base: "80%" }}
+        bg="white"
+        borderRadius="lg"
+        boxShadow="md"
+        p="3"
+      >
         <Stack>
           <Stack direction="row"></Stack>
           <Text
