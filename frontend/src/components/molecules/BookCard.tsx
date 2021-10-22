@@ -1,6 +1,7 @@
 import { Button } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
 import { Box, Flex, Stack, Text } from "@chakra-ui/layout";
+import { useToast } from "@chakra-ui/toast";
 import { VFC } from "react";
 import { useNavigate } from "react-router";
 import { useAppDispatch } from "../../app/hooks";
@@ -15,6 +16,7 @@ type Props = {
 export const BookCard: VFC<Props> = ({ book }) => {
   const { deleteBookMutation } = useMutationBooks();
   const { data: myprof } = useQueryMyProf();
+  const toast = useToast();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const onClickUsername = () => {
@@ -23,6 +25,13 @@ export const BookCard: VFC<Props> = ({ book }) => {
   };
   const deleteBook = () => {
     deleteBookMutation.mutate(book.id);
+    toast({
+      title: "Book Deleted",
+      description: "Success to delete the book",
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+    });
   };
   return (
     <>
