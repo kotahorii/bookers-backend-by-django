@@ -1,5 +1,5 @@
-import { VFC } from "react";
+import { VFC, memo } from "react";
 
-export const Users: VFC = () => {
+export const Users: VFC = memo(() => {
   return <></>;
-};
+});

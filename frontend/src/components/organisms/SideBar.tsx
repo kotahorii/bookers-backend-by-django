@@ -1,4 +1,4 @@
-import { VFC, useState, ChangeEvent } from "react";
+import { VFC, useState, ChangeEvent, memo } from "react";
 import { Avatar } from "@chakra-ui/avatar";
 import { Button } from "@chakra-ui/button";
 import Icon from "@chakra-ui/icon";
@@ -11,7 +11,7 @@ import * as yup from "yup";
 import { FormInputBook } from "../../types/bookTypes";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-export const SideBar: VFC = () => {
+export const SideBar: VFC = memo(() => {
   const [file, setFile] = useState<File | null>(null);
 
   const handlerInputPicture = () => {
@@ -106,4 +106,4 @@ export const SideBar: VFC = () => {
       </Stack>
     </>
   );
-};
+});

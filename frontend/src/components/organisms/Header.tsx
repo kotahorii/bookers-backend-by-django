@@ -1,10 +1,10 @@
+import { VFC, memo } from "react";
 import { Button } from "@chakra-ui/button";
 import { Heading, Stack } from "@chakra-ui/layout";
-import { VFC } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
 
-export const Header: VFC = () => {
+export const Header: VFC = memo(() => {
   const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem("localJWT");
@@ -77,4 +77,4 @@ export const Header: VFC = () => {
       </Stack>
     </>
   );
-};
+});

@@ -1,7 +1,7 @@
 import { Heading } from "@chakra-ui/layout";
-import { VFC } from "react";
+import { VFC, memo } from "react";
 
-export const BookList: VFC = () => {
+export const BookList: VFC = memo(() => {
   return (
     <>
       <Heading textAlign="center" color="gray.600">
@@ -9,4 +9,4 @@ export const BookList: VFC = () => {
       </Heading>
     </>
   );
-};
+});

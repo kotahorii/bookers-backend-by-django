@@ -1,10 +1,10 @@
-import { VFC, useEffect } from "react";
+import { VFC, memo, useEffect } from "react";
 import { Header } from "../organisms/Header";
 import { Container, Flex } from "@chakra-ui/layout";
 import { Outlet, useNavigate } from "react-router";
 import { SideBar } from "../organisms/SideBar";
 
-export const MainPage: VFC = () => {
+export const MainPage: VFC = memo(() => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,4 +27,4 @@ export const MainPage: VFC = () => {
       </Flex>
     </>
   );
-};
+});

@@ -1,4 +1,4 @@
-import { VFC, useState } from "react";
+import { VFC, useState, memo } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -15,7 +15,7 @@ import {
   fetchAsyncRegister,
 } from "../../features/auth/authSlice";
 
-export const Auth: VFC = () => {
+export const Auth: VFC = memo(() => {
   const [isLoginMode, setIsLoginMode] = useState(true);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -104,4 +104,4 @@ export const Auth: VFC = () => {
       </Flex>
     </>
   );
-};
+});
