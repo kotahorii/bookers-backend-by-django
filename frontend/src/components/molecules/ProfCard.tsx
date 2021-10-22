@@ -1,6 +1,9 @@
 import { Avatar } from "@chakra-ui/avatar";
 import { Box, Stack, Text } from "@chakra-ui/layout";
 import { VFC, memo } from "react";
+import { useNavigate } from "react-router";
+import { useAppDispatch } from "../../app/hooks";
+import { setId } from "../../features/idSlice";
 import { Profile } from "../../types/loginTypes";
 
 type Props = {
@@ -8,9 +11,16 @@ type Props = {
 };
 
 export const ProfCard: VFC<Props> = memo(({ prof }) => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const onClickUsername = () => {
+    dispatch(setId(prof.user_profile));
+    navigate(`/books/${prof.user_profile}`);
+  };
   return (
     <>
       <Box
+        onClick={onClickUsername}
         cursor="pointer"
         _hover={{ boxShadow: "lg" }}
         w={{ md: "60%", base: "80%" }}

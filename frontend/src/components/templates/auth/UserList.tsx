@@ -1,8 +1,7 @@
 import { Heading, Stack } from "@chakra-ui/layout";
 import { VFC, memo } from "react";
-import { Outlet } from "react-router";
 import { useQueryProfs } from "../../../hooks/auth/useQueryProfs";
-import { ProfCard } from "../../organisms/ProfCard";
+import { ProfCard } from "../../molecules/ProfCard";
 import { SideBar } from "../../organisms/SideBar";
 
 export const UserList: VFC = memo(() => {
