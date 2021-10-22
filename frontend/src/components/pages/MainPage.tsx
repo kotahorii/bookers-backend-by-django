@@ -19,7 +19,7 @@ export const MainPage: VFC = memo(() => {
         <Container maxW="7xl" p="0">
           <Flex direction={{ base: "column", md: "row" }} pt="5">
             <SideBar />
-            <Flex flex={2} w="full" bg="blue.50" justify="center">
+            <Flex flex={2} w="full" justify="center">
               <Outlet />
             </Flex>
           </Flex>

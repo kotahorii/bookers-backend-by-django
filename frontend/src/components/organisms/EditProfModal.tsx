@@ -28,7 +28,6 @@ import {
   RefetchQueryFilters,
 } from "react-query";
 import { Profile } from "../../types/loginTypes";
-import { useNavigate } from "react-router";
 
 type Props = {
   refetch: <TPageData>(
@@ -37,7 +36,6 @@ type Props = {
 };
 
 export const EditProfModal: VFC<Props> = memo(({ refetch }) => {
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const editedProf = useAppSelector(selectEditedProf);
   const isOpenProfEditModal = useAppSelector(selectIsOpenProfEditModal);

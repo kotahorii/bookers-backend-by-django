@@ -93,6 +93,7 @@ export const SideBar: VFC = memo(() => {
               {myprof?.introduction}
             </Text>
             <Button
+              boxShadow="md"
               onClick={openEditProfModal}
               color="white"
               bg="gray.300"
@@ -131,6 +132,7 @@ export const SideBar: VFC = memo(() => {
                   <Text textAlign="center">{file?.name}</Text>
                 </Stack>
                 <Button
+                  boxShadow="lg"
                   type="submit"
                   isLoading={isSubmitting}
                   color="white"
