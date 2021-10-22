@@ -81,7 +81,7 @@ const initialState: AuthState = {
   },
   selectedProf: {
     id: "",
-    img: null,
+    img: undefined,
     introduction: "",
     user_profile: 0,
     user_profile_username: "",

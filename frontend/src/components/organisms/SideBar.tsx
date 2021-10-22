@@ -54,7 +54,7 @@ export const SideBar: VFC = memo(() => {
         </Heading>
         <Stack px="5">
           <Stack direction="row" align="center" spacing="5" maxW="300px">
-            <Avatar src="https://pbs.twimg.com/media/FBGkAjGUUAscwPU?format=jpg&name=4096x4096" />
+            <Avatar src={myprof?.img} />
             <Text
               fontSize="20px"
               fontWeight="bold"

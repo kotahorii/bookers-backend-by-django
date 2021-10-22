@@ -23,7 +23,7 @@ export type Profile = {
   id: string;
   user_profile: number;
   user_profile_username: string;
-  img: string | null;
+  img: string | undefined;
   introduction: string | null;
 };
 export type FormInputProf = {
