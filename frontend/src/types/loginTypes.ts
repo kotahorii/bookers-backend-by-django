@@ -17,14 +17,14 @@ export type JWT = {
 export type PostProf = {
   id: string;
   img: File | null;
-  introduction: string | null;
+  introduction: string | undefined;
 };
 export type Profile = {
   id: string;
   user_profile: number;
   user_profile_username: string;
   img: string | undefined;
-  introduction: string | null;
+  introduction: string | undefined;
 };
 export type FormInputProf = {
   introduction: string;

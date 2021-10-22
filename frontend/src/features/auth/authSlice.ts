@@ -39,7 +39,7 @@ export const fetchAsyncCreateProf = createAsyncThunk(
   async () => {
     const res = await axios.post(
       `${apiUrl}api/profile/`,
-      { img: null, introduction: null },
+      { img: null, introduction: undefined },
       {
         headers: {
           "Content-Type": "application/json",

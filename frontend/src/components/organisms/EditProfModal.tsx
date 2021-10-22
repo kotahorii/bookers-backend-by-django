@@ -1,6 +1,6 @@
-import { VFC, memo, useState, ChangeEvent } from "react";
+import { VFC, memo, useState, ChangeEvent, FormEvent } from "react";
 import { Button } from "@chakra-ui/button";
-import { FormControl } from "@chakra-ui/form-control";
+import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { Input } from "@chakra-ui/input";
 import { Stack, Text } from "@chakra-ui/layout";
 import {
@@ -12,25 +12,66 @@ import {
 } from "@chakra-ui/modal";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import {
+  fetchAsyncUpdateProf,
+  resetEditProf,
   resetIsOpenEditModal,
+  selectEditedProf,
   selectIsOpenProfEditModal,
+  setEditProf,
 } from "../../features/auth/authSlice";
 import Icon from "@chakra-ui/icon";
 import { BsCardImage } from "react-icons/bs";
 import { BsFillImageFill } from "react-icons/bs";
+import {
+  QueryObserverResult,
+  RefetchOptions,
+  RefetchQueryFilters,
+} from "react-query";
+import { Profile } from "../../types/loginTypes";
 
-export const EditProfModal: VFC = memo(() => {
+type Props = {
+  refetch: <TPageData>(
+    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+  ) => Promise<QueryObserverResult<Profile, Error>>;
+};
+
+export const EditProfModal: VFC<Props> = memo(({ refetch }) => {
   const dispatch = useAppDispatch();
+  const editedProf = useAppSelector(selectEditedProf);
   const isOpenProfEditModal = useAppSelector(selectIsOpenProfEditModal);
-  const [file, setFile] = useState<File | null>(null);
+  const [profImg, setProfImg] = useState<File | null>(null);
 
-  const handlerInputPicture = () => {
-    const fileInput = document.getElementById("imageInput");
+  const handlerInputProf = () => {
+    const fileInput = document.getElementById("profImgInput");
     fileInput?.click();
   };
 
   const clickInputFile = (e: ChangeEvent<HTMLInputElement>) => {
-    setFile(e.target.files![0]);
+    setProfImg(e.target.files![0]);
+  };
+
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(
+      fetchAsyncUpdateProf({
+        id: editedProf.id,
+        img: profImg,
+        introduction: editedProf.introduction,
+      })
+    );
+    dispatch(resetEditProf());
+    setProfImg(null);
+    dispatch(resetIsOpenEditModal());
+    refetch();
+  };
+
+  const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+    dispatch(
+      setEditProf({
+        ...editedProf,
+        introduction: e.target.value,
+      })
+    );
   };
 
   return (
@@ -43,33 +84,35 @@ export const EditProfModal: VFC = memo(() => {
         <ModalContent px="8" pb="8" bg="gray.50">
           <ModalHeader textAlign="center">Edit Prof</ModalHeader>
           <ModalBody>
-            <form>
+            <form onSubmit={onSubmit}>
               <Stack spacing="4">
                 <FormControl>
+                  <FormLabel>Introduction</FormLabel>
                   <Input
-                    placeholder="Introduction"
                     variant="flushed"
                     type="text"
+                    value={editedProf.introduction}
+                    onChange={handleChangeInput}
                   />
                 </FormControl>
                 <Stack spacing="5">
-                  <Stack direction="row" mb="3" align="center">
+                  <Stack direction="row" mb="3" align="center" spacing="5">
                     <input
                       accept=".png, .jpg, 'jpeg"
                       type="file"
-                      id="imageInput"
+                      id="profImgInput"
                       hidden={true}
                       onChange={clickInputFile}
                     />
                     <Icon
-                      onClick={handlerInputPicture}
-                      as={file ? BsFillImageFill : BsCardImage}
+                      onClick={handlerInputProf}
+                      as={profImg ? BsFillImageFill : BsCardImage}
                       fontSize="22px"
                       cursor="pointer"
                       color="gray.500"
                       _hover={{ color: "gray.600" }}
                     />
-                    <Text textAlign="center">{file?.name}</Text>
+                    <Text textAlign="center">{profImg?.name}</Text>
                   </Stack>
                   <Button
                     type="submit"

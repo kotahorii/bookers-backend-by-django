@@ -11,14 +11,14 @@ import * as yup from "yup";
 import { FormInputBook } from "../../types/bookTypes";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAppDispatch } from "../../app/hooks";
-import { setIsOpenEditModal } from "../../features/auth/authSlice";
+import { setEditProf, setIsOpenEditModal } from "../../features/auth/authSlice";
 import { EditProfModal } from "./EditProfModal";
 import { useQueryMyProf } from "../../hooks/auth/useQueryMyProf";
 import { fetchAsyncNewBook } from "../../features/books/bookSlice";
 
 export const SideBar: VFC = memo(() => {
   const [file, setFile] = useState<File | null>(null);
-  const { data: myprof } = useQueryMyProf();
+  const { data: myprof, refetch } = useQueryMyProf();
   const dispatch = useAppDispatch();
 
   const handlerInputPicture = () => {
@@ -44,6 +44,15 @@ export const SideBar: VFC = memo(() => {
 
   const openEditProfModal = () => {
     dispatch(setIsOpenEditModal());
+    if (myprof) {
+      dispatch(
+        setEditProf({
+          id: myprof.id,
+          img: null,
+          introduction: myprof.introduction,
+        })
+      );
+    }
   };
 
   const onSubmit: SubmitHandler<FormInputBook> = (data) => {
@@ -54,6 +63,7 @@ export const SideBar: VFC = memo(() => {
         book_image: file,
       })
     );
+    refetch();
     setValue("title", "");
     setValue("body", "");
     setFile(null);
@@ -134,7 +144,7 @@ export const SideBar: VFC = memo(() => {
           </Stack>
         </Stack>
       </Stack>
-      <EditProfModal />
+      <EditProfModal refetch={refetch} />
     </>
   );
 });
