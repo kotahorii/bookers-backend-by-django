@@ -2,7 +2,7 @@ import { Button } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
 import { Box, Flex, Stack, Text } from "@chakra-ui/layout";
 import { useToast } from "@chakra-ui/toast";
-import { VFC } from "react";
+import { VFC, memo } from "react";
 import { useNavigate } from "react-router";
 import { useAppDispatch } from "../../app/hooks";
 import { openEditedModal, setEditedBook } from "../../features/books/bookSlice";
@@ -10,12 +10,11 @@ import { setId } from "../../features/idSlice";
 import { useQueryMyProf } from "../../hooks/auth/useQueryMyProf";
 import { useMutationBooks } from "../../hooks/book/useMutateBooks";
 import { ReadBook } from "../../types/bookTypes";
-import { EditBookModal } from "../organisms/EditBookModal";
 
 type Props = {
   book: ReadBook;
 };
-export const BookCard: VFC<Props> = ({ book }) => {
+export const BookCard: VFC<Props> = memo(({ book }) => {
   const { deleteBookMutation } = useMutationBooks();
   const { data: myprof } = useQueryMyProf();
   const toast = useToast();
@@ -118,4 +117,4 @@ export const BookCard: VFC<Props> = ({ book }) => {
       </Box>
     </>
   );
-};
+});

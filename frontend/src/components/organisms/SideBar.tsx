@@ -19,10 +19,12 @@ import { useToast } from "@chakra-ui/toast";
 import { useNavigate } from "react-router";
 import { useQueryBooks } from "../../hooks/book/useQueryBooks";
 import { EditBookModal } from "./EditBookModal";
+import { useQueryProfs } from "../../hooks/auth/useQueryProfs";
 
 export const SideBar: VFC = memo(() => {
   const [file, setFile] = useState<File | null>(null);
   const navigate = useNavigate();
+  const { data: profs } = useQueryProfs();
   const { data: myprof } = useQueryMyProf();
   const { refetch: refetchBooks } = useQueryBooks();
   const dispatch = useAppDispatch();
@@ -31,6 +33,14 @@ export const SideBar: VFC = memo(() => {
     const fileInput = document.getElementById("imageInput");
     fileInput?.click();
   };
+  /* eslint-disable */
+  const num = location.pathname.split("/").slice(-1)[0];
+  const path = location.pathname.split("/")[1];
+  /* eslint-enable */
+  const selectedProf =
+    num === "" || path === "users"
+      ? myprof
+      : profs?.filter((prof) => prof.user_profile === Number(num))[0];
 
   const clickInputFile = (e: ChangeEvent<HTMLInputElement>) => {
     setFile(e.target.files![0]);
@@ -104,20 +114,20 @@ export const SideBar: VFC = memo(() => {
             borderRadius="lg"
             p="2"
           >
-            <Avatar src={myprof?.img} />
+            <Avatar src={selectedProf?.img} />
             <Text
               fontSize="20px"
               fontWeight="bold"
               color="gray.600"
               maxW="300px"
             >
-              {myprof?.user_profile_username}
+              {selectedProf?.user_profile_username}
             </Text>
           </Stack>
           <Stack spacing="3">
             <Text fontSize="18px">Introduction:</Text>
             <Text maxW="300px" fontSize="18px">
-              {myprof?.introduction}
+              {selectedProf?.introduction}
             </Text>
             <Button
               boxShadow="md"
