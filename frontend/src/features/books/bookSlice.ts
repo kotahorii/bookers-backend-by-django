@@ -29,8 +29,8 @@ export const fetchAsyncUpdateBook = createAsyncThunk(
   "book/put",
   async (editBook: PostBook) => {
     const uploadData = new FormData();
-    uploadData.append("title", editBook.id);
-    editBook.body && uploadData.append("body", editBook.body);
+    uploadData.append("title", editBook.title);
+    uploadData.append("body", editBook.body);
     editBook.book_image &&
       uploadData.append(
         "book_image",
@@ -38,7 +38,7 @@ export const fetchAsyncUpdateBook = createAsyncThunk(
         editBook.book_image.name
       );
     const res = await axios.put(
-      `${apiUrl}api/book/${editBook.id}`,
+      `${apiUrl}api/book/${editBook.id}/`,
       uploadData,
       {
         headers: {
@@ -100,15 +100,6 @@ export const bookSlice = createSlice({
     closeSelectedModal: (state) => {
       state.isOpenSelectedModal = false;
     },
-  },
-
-  extraReducers: (builder) => {
-    builder.addCase(fetchAsyncNewBook.rejected, (state) => {
-      window.location.href = "login/";
-    });
-    builder.addCase(fetchAsyncUpdateBook.rejected, (state) => {
-      window.location.href = "login/";
-    });
   },
 });
 

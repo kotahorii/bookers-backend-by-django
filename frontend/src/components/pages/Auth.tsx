@@ -40,7 +40,7 @@ export const Auth: VFC = memo(() => {
         await dispatch(fetchAsyncLogin(data));
         await dispatch(fetchAsyncCreateProf());
         await navigate("/");
-      }
+      } 
     }
   };
   const toggleIsLogin = () => setIsLoginMode(!isLoginMode);

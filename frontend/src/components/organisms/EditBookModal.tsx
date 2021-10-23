@@ -14,16 +14,22 @@ import {
 import { useToast } from "@chakra-ui/toast";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { selectEditedProf } from "../../features/auth/authSlice";
 import {
   closeEditedModal,
+  fetchAsyncUpdateBook,
+  resetEditedBook,
   selectEditedBook,
   selectIsOpenEditedModal,
+  setEditedBook,
 } from "../../features/books/bookSlice";
 import { BsCardImage, BsFillImageFill } from "react-icons/bs";
+import { useQueryBooks } from "../../hooks/book/useQueryBooks";
+import { useNavigate } from "react-router";
 
-export const EditBookModal = memo(() => {
+export const EditBookModal: VFC = memo(() => {
   const [bookImg, setBookImg] = useState<File | null>(null);
+  const navigate = useNavigate();
+  const { refetch } = useQueryBooks();
 
   const isOpenEditModal = useAppSelector(selectIsOpenEditedModal);
   const dispatch = useAppDispatch();
@@ -37,11 +43,40 @@ export const EditBookModal = memo(() => {
 
   const clickInputFile = (e: ChangeEvent<HTMLInputElement>) => {
     setBookImg(e.target.files![0]);
-    console.log("input");
+    console.log(bookImg);
   };
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const res = await dispatch(
+      fetchAsyncUpdateBook({
+        id: editedBook.id,
+        book_image: bookImg,
+        title: editedBook.title,
+        body: editedBook.body,
+      })
+    );
+    if (fetchAsyncUpdateBook.fulfilled.match(res)) {
+      dispatch(resetEditedBook());
+      setBookImg(null);
+      dispatch(closeEditedModal());
+      refetch();
+      toast({
+        title: "Book Updated.",
+        description: "Success to update your book",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+    } else {
+      navigate("login/");
+    }
+  };
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    let value: string = e.target.value;
+    const name = e.target.name;
+    dispatch(setEditedBook({ ...editedBook, [name]: value }));
   };
 
   return (
@@ -62,6 +97,8 @@ export const EditBookModal = memo(() => {
                     variant="flushed"
                     type="text"
                     value={editedBook.title}
+                    onChange={handleInputChange}
+                    name="title"
                   />
                 </FormControl>
                 <FormControl>
@@ -70,6 +107,8 @@ export const EditBookModal = memo(() => {
                     variant="flushed"
                     type="text"
                     value={editedBook.body}
+                    onChange={handleInputChange}
+                    name="body"
                   />
                 </FormControl>
                 <Stack spacing="5">

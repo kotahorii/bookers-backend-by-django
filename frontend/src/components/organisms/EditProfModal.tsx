@@ -24,9 +24,11 @@ import { BsCardImage } from "react-icons/bs";
 import { BsFillImageFill } from "react-icons/bs";
 import { useToast } from "@chakra-ui/react";
 import { useQueryMyProf } from "../../hooks/auth/useQueryMyProf";
+import { useNavigate } from "react-router";
 
 export const EditProfModal: VFC = memo(() => {
   const { refetch } = useQueryMyProf();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const editedProf = useAppSelector(selectEditedProf);
   const isOpenProfEditModal = useAppSelector(selectIsOpenProfEditModal);
@@ -58,11 +60,13 @@ export const EditProfModal: VFC = memo(() => {
       refetch();
       toast({
         title: "Profile Updated.",
-        description: "Success to Create your Profile",
+        description: "Success to Create your prof",
         status: "success",
         duration: 9000,
         isClosable: true,
       });
+    } else {
+      navigate("login/");
     }
   };
 

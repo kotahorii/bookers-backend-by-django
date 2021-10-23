@@ -123,7 +123,7 @@ export const authSlice = createSlice({
       alert("Login Failed");
     });
     builder.addCase(fetchAsyncUpdateProf.rejected, (state) => {
-      window.location.href = "login/";
+      window.location.href = "login";
     });
   },
 });

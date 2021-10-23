@@ -19,6 +19,8 @@ import { useToast } from "@chakra-ui/toast";
 import { useNavigate } from "react-router";
 import { useQueryBooks } from "../../hooks/book/useQueryBooks";
 
+//eslint-disable-next-line
+console.log(location.pathname);
 export const SideBar: VFC = memo(() => {
   const [file, setFile] = useState<File | null>(null);
   const navigate = useNavigate();
@@ -81,6 +83,8 @@ export const SideBar: VFC = memo(() => {
       setFile(null);
       navigate("books");
       refetchBooks();
+    } else {
+      navigate("login/");
     }
   };
 
