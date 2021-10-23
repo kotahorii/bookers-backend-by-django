@@ -116,7 +116,6 @@ export const BookCard: VFC<Props> = ({ book }) => {
           </Stack>
         </Stack>
       </Box>
-      <EditBookModal />
     </>
   );
 };

@@ -27,7 +27,7 @@ import { useQueryBooks } from "../../hooks/book/useQueryBooks";
 import { useNavigate } from "react-router";
 
 export const EditBookModal: VFC = memo(() => {
-  const [bookImg, setBookImg] = useState<File | null>(null);
+  const [image, setImage] = useState<File | null>(null);
   const navigate = useNavigate();
   const { refetch } = useQueryBooks();
 
@@ -36,14 +36,15 @@ export const EditBookModal: VFC = memo(() => {
   const toast = useToast();
   const editedBook = useAppSelector(selectEditedBook);
 
-  const handlerInputBook = () => {
-    const fileInput = document.getElementById("bookImage");
+  const handlerEditPicture = () => {
+    const fileInput = document.getElementById("imageBook");
     fileInput?.click();
+    console.log(image);
   };
 
   const clickInputFile = (e: ChangeEvent<HTMLInputElement>) => {
-    setBookImg(e.target.files![0]);
-    console.log(bookImg);
+    setImage(e.target.files![0]);
+    console.log(image);
   };
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -51,14 +52,14 @@ export const EditBookModal: VFC = memo(() => {
     const res = await dispatch(
       fetchAsyncUpdateBook({
         id: editedBook.id,
-        book_image: bookImg,
+        book_image: image,
         title: editedBook.title,
         body: editedBook.body,
       })
     );
     if (fetchAsyncUpdateBook.fulfilled.match(res)) {
       dispatch(resetEditedBook());
-      setBookImg(null);
+      setImage(null);
       dispatch(closeEditedModal());
       refetch();
       toast({
@@ -89,6 +90,13 @@ export const EditBookModal: VFC = memo(() => {
         <ModalContent px="8" pb="8" bg="gray.50">
           <ModalHeader textAlign="center">Edit Book</ModalHeader>
           <ModalBody>
+            <input
+              accept=".png, .jpg, 'jpeg"
+              type="file"
+              id="imageBook"
+              hidden={true}
+              onChange={clickInputFile}
+            />
             <form onSubmit={onSubmit}>
               <Stack spacing="4">
                 <FormControl>
@@ -114,22 +122,15 @@ export const EditBookModal: VFC = memo(() => {
                 <Stack spacing="5">
                   <Stack direction="row" mb="3" align="center" spacing="5">
                     <Stack direction="row" mb="3" align="center" spacing="5">
-                      <input
-                        accept=".png, .jpg, 'jpeg"
-                        type="file"
-                        id="bookImage"
-                        hidden={true}
-                        onChange={clickInputFile}
-                      />
                       <Icon
-                        onClick={handlerInputBook}
-                        as={bookImg ? BsFillImageFill : BsCardImage}
+                        onClick={handlerEditPicture}
+                        as={image ? BsFillImageFill : BsCardImage}
                         fontSize="22px"
                         cursor="pointer"
                         color="gray.500"
                         _hover={{ color: "gray.600" }}
                       />
-                      <Text textAlign="center">{bookImg?.name}</Text>
+                      <Text textAlign="center">{image?.name}</Text>
                     </Stack>
                   </Stack>
                   <Button
