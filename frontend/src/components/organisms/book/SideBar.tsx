@@ -8,18 +8,18 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { BsCardImage } from "react-icons/bs";
 import { BsFillImageFill } from "react-icons/bs";
 import * as yup from "yup";
-import { FormInputBook } from "../../types/bookTypes";
+import { FormInputBook } from "../../../types/bookTypes";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useAppDispatch } from "../../app/hooks";
-import { setEditProf, setIsOpenEditModal } from "../../features/auth/authSlice";
-import { EditProfModal } from "./EditProfModal";
-import { useQueryMyProf } from "../../hooks/auth/useQueryMyProf";
-import { fetchAsyncNewBook } from "../../features/books/bookSlice";
+import { useAppDispatch } from "../../../app/hooks";
+import { setEditProf, setIsOpenEditModal } from "../../../features/auth/authSlice";
+import { EditProfModal } from "../auth/EditProfModal";
+import { useQueryMyProf } from "../../../hooks/auth/useQueryMyProf";
+import { fetchAsyncNewBook } from "../../../features/books/bookSlice";
 import { useToast } from "@chakra-ui/toast";
 import { useNavigate } from "react-router";
-import { useQueryBooks } from "../../hooks/book/useQueryBooks";
+import { useQueryBooks } from "../../../hooks/book/useQueryBooks";
 import { EditBookModal } from "./EditBookModal";
-import { useQueryProfs } from "../../hooks/auth/useQueryProfs";
+import { useQueryProfs } from "../../../hooks/auth/useQueryProfs";
 
 export const SideBar: VFC = memo(() => {
   const [file, setFile] = useState<File | null>(null);

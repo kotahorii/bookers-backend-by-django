@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import { useAppDispatch } from "../../app/hooks";
 import { setId } from "../../features/idSlice";
 import { Profile } from "../../types/loginTypes";
-import { EditBookModal } from "../organisms/EditBookModal";
+import { EditBookModal } from "../organisms/book/EditBookModal";
 
 type Props = {
   prof: Profile;

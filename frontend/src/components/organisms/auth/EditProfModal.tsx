@@ -10,7 +10,7 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/modal";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import {
   fetchAsyncUpdateProf,
   resetEditProf,
@@ -18,12 +18,12 @@ import {
   selectEditedProf,
   selectIsOpenProfEditModal,
   setEditProf,
-} from "../../features/auth/authSlice";
+} from "../../../features/auth/authSlice";
 import Icon from "@chakra-ui/icon";
 import { BsCardImage } from "react-icons/bs";
 import { BsFillImageFill } from "react-icons/bs";
 import { useToast } from "@chakra-ui/react";
-import { useQueryMyProf } from "../../hooks/auth/useQueryMyProf";
+import { useQueryMyProf } from "../../../hooks/auth/useQueryMyProf";
 import { useNavigate } from "react-router";
 
 export const EditProfModal: VFC = memo(() => {

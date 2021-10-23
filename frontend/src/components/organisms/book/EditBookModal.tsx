@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/modal";
 import { useToast } from "@chakra-ui/toast";
 import React from "react";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import {
   closeEditedModal,
   fetchAsyncUpdateBook,
@@ -21,9 +21,9 @@ import {
   selectEditedBook,
   selectIsOpenEditedModal,
   setEditedBook,
-} from "../../features/books/bookSlice";
+} from "../../../features/books/bookSlice";
 import { BsCardImage, BsFillImageFill } from "react-icons/bs";
-import { useQueryBooks } from "../../hooks/book/useQueryBooks";
+import { useQueryBooks } from "../../../hooks/book/useQueryBooks";
 import { useNavigate } from "react-router";
 
 export const EditBookModal: VFC = memo(() => {

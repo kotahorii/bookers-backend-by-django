@@ -1,8 +1,8 @@
 import { VFC, memo, useEffect } from "react";
-import { Header } from "../organisms/Header";
+import { Header } from "../organisms/book/Header";
 import { Container, Flex } from "@chakra-ui/layout";
 import { Outlet, useNavigate } from "react-router";
-import { SideBar } from "../organisms/SideBar";
+import { SideBar } from "../organisms/book/SideBar";
 import { useQueryMyProf } from "../../hooks/auth/useQueryMyProf";
 import { useQueryProfs } from "../../hooks/auth/useQueryProfs";
 import { useQueryBooks } from "../../hooks/book/useQueryBooks";

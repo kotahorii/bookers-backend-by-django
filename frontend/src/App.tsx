@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router";
-import { AllBook } from "./components/organisms/AllBook";
-import { SelectedUsersBook } from "./components/organisms/SelectedUsersBook";
+import { SelectedUsersBook } from "./components/organisms/auth/SelectedUsersBook";
+import { AllBook } from "./components/organisms/book/AllBook";
 import { Auth } from "./components/pages/Auth";
 import { MainPage } from "./components/pages/MainPage";
 import { UserList } from "./components/templates/auth/UserList";

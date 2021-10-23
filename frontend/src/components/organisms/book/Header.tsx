@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
+import { Collapse } from "@chakra-ui/transition";
+import { MobileNav } from "../../molecules/MobileNav";
 export const Header: VFC = memo(() => {
   const navigate = useNavigate();
   const logout = () => {
@@ -20,7 +22,6 @@ export const Header: VFC = memo(() => {
     });
   };
 
-  const onClickList = () => {};
   return (
     <>
       <Stack
@@ -68,7 +69,6 @@ export const Header: VFC = memo(() => {
           pr="10"
         >
           <Button
-            onClick={onClickList}
             fontWeight="bold"
             color="gray.500"
             bg="transparent"
@@ -78,7 +78,6 @@ export const Header: VFC = memo(() => {
             <Link to="books/">Books</Link>
           </Button>
           <Button
-            onClick={onClickList}
             fontWeight="bold"
             color="gray.500"
             bg="transparent"
@@ -100,6 +99,9 @@ export const Header: VFC = memo(() => {
           </Button>
         </Stack>
       </Stack>
+      <Collapse animateOpacity in={isOpen}>
+        <MobileNav />
+      </Collapse>
     </>
   );
 });
