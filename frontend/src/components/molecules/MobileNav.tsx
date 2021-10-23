@@ -3,6 +3,7 @@ import { Text } from "@chakra-ui/layout";
 import { Link } from "react-router-dom";
 import { VFC, memo } from "react";
 import { useNavigate } from "react-router";
+import styles from "./MobileNav.module.css";
 
 export const MobileNav: VFC = memo(() => {
   const navigate = useNavigate();
@@ -12,7 +13,13 @@ export const MobileNav: VFC = memo(() => {
   };
   return (
     <>
-      <Stack direction="column" bg="transparent" p="4" display={{ md: "none" }}>
+      <Stack
+        direction="column"
+        bg="transparent"
+        p="4"
+        display={{ md: "none" }}
+        className={styles.sticky}
+      >
         <Text fontWeight="bold" color="gray.500" _hover={{ color: "gray.600" }}>
           <Link to="books/">Books</Link>
         </Text>

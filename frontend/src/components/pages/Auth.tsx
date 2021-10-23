@@ -49,7 +49,7 @@ export const Auth: VFC = memo(() => {
 
   return (
     <>
-      <Flex minH="100vh" align="center" justify="center" bg="gray.50">
+      <Flex minH="100vh" align="center" justify="center" bg="gray.50" p="3">
         <Stack
           spacing="4"
           w="full"
