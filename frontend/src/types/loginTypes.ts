@@ -32,5 +32,4 @@ export type FormInputProf = {
 export type AuthState = {
   isOpenEditProfModal: boolean;
   editedProf: PostProf;
-  selectedProf: Profile;
 };

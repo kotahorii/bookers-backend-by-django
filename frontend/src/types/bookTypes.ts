@@ -22,5 +22,4 @@ export type BookState = {
   isOpenEditedModal: boolean;
   isOpenSelectedModal: boolean;
   editedBook: PostBook;
-  selectedBook: ReadBook;
 };

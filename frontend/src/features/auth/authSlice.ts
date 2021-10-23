@@ -79,13 +79,6 @@ const initialState: AuthState = {
     img: null,
     introduction: "",
   },
-  selectedProf: {
-    id: "",
-    img: undefined,
-    introduction: "",
-    user_profile: 0,
-    user_profile_username: "",
-  },
 };
 
 export const authSlice = createSlice({
@@ -97,12 +90,6 @@ export const authSlice = createSlice({
     },
     resetEditProf: (state) => {
       state.editedProf = initialState.editedProf;
-    },
-    setSelectedProf: (state, action: PayloadAction<Profile>) => {
-      state.selectedProf = action.payload;
-    },
-    resetSelectedProf: (state) => {
-      state.selectedProf = initialState.selectedProf;
     },
     setIsOpenEditModal: (state) => {
       state.isOpenEditProfModal = true;
@@ -130,14 +117,11 @@ export const authSlice = createSlice({
 
 export const {
   setEditProf,
-  setSelectedProf,
   resetEditProf,
-  resetSelectedProf,
   setIsOpenEditModal,
   resetIsOpenEditModal,
 } = authSlice.actions;
 export const selectEditedProf = (state: RootState) => state.auth.editedProf;
-export const selectSelectedProf = (state: RootState) => state.auth.selectedProf;
 export const selectIsOpenProfEditModal = (state: RootState) =>
   state.auth.isOpenEditProfModal;
 export default authSlice.reducer;

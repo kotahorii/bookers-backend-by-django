@@ -60,16 +60,6 @@ const initialState: BookState = {
     body: "",
     book_image: null,
   },
-  selectedBook: {
-    id: "",
-    title: "",
-    body: "",
-    book_image: undefined,
-    created_at: "",
-    updated_at: "",
-    reader: 0,
-    reader_username: "",
-  },
 };
 
 export const bookSlice = createSlice({
@@ -79,14 +69,8 @@ export const bookSlice = createSlice({
     setEditedBook: (state, action: PayloadAction<PostBook>) => {
       state.editedBook = action.payload;
     },
-    setSelectedBook: (state, action: PayloadAction<ReadBook>) => {
-      state.selectedBook = action.payload;
-    },
     resetEditedBook: (state) => {
       state.editedBook = initialState.editedBook;
-    },
-    resetSelectBook: (state) => {
-      state.selectedBook = initialState.selectedBook;
     },
     openEditedModal: (state) => {
       state.isOpenEditedModal = true;
@@ -105,9 +89,7 @@ export const bookSlice = createSlice({
 
 export const {
   setEditedBook,
-  setSelectedBook,
   resetEditedBook,
-  resetSelectBook,
   openEditedModal,
   openSelectedModal,
   closeEditedModal,
@@ -115,10 +97,8 @@ export const {
 } = bookSlice.actions;
 
 export const selectEditedBook = (state: RootState) => state.book.editedBook;
-export const selectSelectedBook = (state: RootState) => state.book.selectedBook;
 export const selectIsOpenEditedModal = (state: RootState) =>
   state.book.isOpenEditedModal;
 export const selectIsOpenSelectedModal = (state: RootState) =>
   state.book.isOpenSelectedModal;
-
 export default bookSlice.reducer;
