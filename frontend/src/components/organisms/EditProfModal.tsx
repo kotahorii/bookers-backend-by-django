@@ -22,21 +22,11 @@ import {
 import Icon from "@chakra-ui/icon";
 import { BsCardImage } from "react-icons/bs";
 import { BsFillImageFill } from "react-icons/bs";
-import {
-  QueryObserverResult,
-  RefetchOptions,
-  RefetchQueryFilters,
-} from "react-query";
-import { Profile } from "../../types/loginTypes";
 import { useToast } from "@chakra-ui/react";
+import { useQueryMyProf } from "../../hooks/auth/useQueryMyProf";
 
-type Props = {
-  refetch: <TPageData>(
-    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
-  ) => Promise<QueryObserverResult<Profile, Error>>;
-};
-
-export const EditProfModal: VFC<Props> = memo(({ refetch }) => {
+export const EditProfModal: VFC = memo(() => {
+  const { refetch } = useQueryMyProf();
   const dispatch = useAppDispatch();
   const editedProf = useAppSelector(selectEditedProf);
   const isOpenProfEditModal = useAppSelector(selectIsOpenProfEditModal);

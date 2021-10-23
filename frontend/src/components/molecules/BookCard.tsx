@@ -5,10 +5,12 @@ import { useToast } from "@chakra-ui/toast";
 import { VFC } from "react";
 import { useNavigate } from "react-router";
 import { useAppDispatch } from "../../app/hooks";
+import { openEditedModal, setEditedBook } from "../../features/books/bookSlice";
 import { setId } from "../../features/idSlice";
 import { useQueryMyProf } from "../../hooks/auth/useQueryMyProf";
 import { useMutationBooks } from "../../hooks/book/useMutateBooks";
 import { ReadBook } from "../../types/bookTypes";
+import { EditBookModal } from "../organisms/EditBookModal";
 
 type Props = {
   book: ReadBook;
@@ -33,6 +35,17 @@ export const BookCard: VFC<Props> = ({ book }) => {
       isClosable: true,
     });
   };
+  const openEditBookModal = () => {
+    dispatch(openEditedModal());
+    dispatch(
+      setEditedBook({
+        id: book.id,
+        title: book.title,
+        body: book.body,
+        book_image: null,
+      })
+    );
+  };
   return (
     <>
       <Box
@@ -56,12 +69,20 @@ export const BookCard: VFC<Props> = ({ book }) => {
               <Text>Body: {book.body}</Text>
               {myprof?.user_profile === book.reader && (
                 <Flex direction="row">
-                  <Button bg="transparent" _hover={{ bg: "gray.50" }}>
+                  <Button
+                    color="gray.600"
+                    bg="transparent"
+                    _hover={{ bg: "gray.50" }}
+                    _focus={{ boxShadow: "none" }}
+                    onClick={openEditBookModal}
+                  >
                     Edit
                   </Button>
                   <Button
+                    color="gray.600"
                     bg="transparent"
                     _hover={{ bg: "gray.50" }}
+                    _focus={{ boxShadow: "none" }}
                     onClick={deleteBook}
                   >
                     Delete
@@ -95,6 +116,7 @@ export const BookCard: VFC<Props> = ({ book }) => {
           </Stack>
         </Stack>
       </Box>
+      <EditBookModal />
     </>
   );
 };

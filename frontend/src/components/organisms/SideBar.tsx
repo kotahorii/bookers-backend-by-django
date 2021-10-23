@@ -17,13 +17,12 @@ import { useQueryMyProf } from "../../hooks/auth/useQueryMyProf";
 import { fetchAsyncNewBook } from "../../features/books/bookSlice";
 import { useToast } from "@chakra-ui/toast";
 import { useNavigate } from "react-router";
-import { useQueryProfs } from "../../hooks/auth/useQueryProfs";
 import { useQueryBooks } from "../../hooks/book/useQueryBooks";
 
 export const SideBar: VFC = memo(() => {
   const [file, setFile] = useState<File | null>(null);
   const navigate = useNavigate();
-  const { data: myprof, refetch } = useQueryMyProf();
+  const { data: myprof } = useQueryMyProf();
   const { refetch: refetchBooks } = useQueryBooks();
   const dispatch = useAppDispatch();
   const toast = useToast();
@@ -171,7 +170,7 @@ export const SideBar: VFC = memo(() => {
           </Stack>
         </Stack>
       </Stack>
-      <EditProfModal refetch={refetch} />
+      <EditProfModal />
     </>
   );
 });
