@@ -1,4 +1,6 @@
 import { Button } from "@chakra-ui/button";
+import { Icon } from "@chakra-ui/icon";
+import { BiEdit } from "react-icons/bi";
 import { Image } from "@chakra-ui/image";
 import { Box, Flex, Stack, Text } from "@chakra-ui/layout";
 import { useToast } from "@chakra-ui/toast";
@@ -10,6 +12,7 @@ import { setId } from "../../features/idSlice";
 import { useQueryMyProf } from "../../hooks/auth/useQueryMyProf";
 import { useMutationBooks } from "../../hooks/book/useMutateBooks";
 import { ReadBook } from "../../types/bookTypes";
+import { AiOutlineDelete } from "react-icons/ai";
 
 type Props = {
   book: ReadBook;
@@ -74,8 +77,10 @@ export const BookCard: VFC<Props> = memo(({ book }) => {
                     _hover={{ bg: "gray.50" }}
                     _focus={{ boxShadow: "none" }}
                     onClick={openEditBookModal}
+                    fontSize="22px"
+                    size="sm"
                   >
-                    Edit
+                    <Icon as={BiEdit} />
                   </Button>
                   <Button
                     color="gray.600"
@@ -83,8 +88,10 @@ export const BookCard: VFC<Props> = memo(({ book }) => {
                     _hover={{ bg: "gray.50" }}
                     _focus={{ boxShadow: "none" }}
                     onClick={deleteBook}
+                    fontSize="22px"
+                    size="sm"
                   >
-                    Delete
+                    <Icon as={AiOutlineDelete} />
                   </Button>
                 </Flex>
               )}

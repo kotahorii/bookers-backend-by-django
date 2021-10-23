@@ -7,8 +7,10 @@ import { useNavigate } from "react-router";
 import { Flex, Heading, Stack, Text } from "@chakra-ui/layout";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { Input } from "@chakra-ui/input";
+import { Icon } from "@chakra-ui/icon";
 import { Button } from "@chakra-ui/button";
 import { useAppDispatch } from "../../app/hooks";
+import { RiLoginBoxLine } from "react-icons/ri";
 import {
   fetchAsyncCreateProf,
   fetchAsyncLogin,
@@ -40,7 +42,7 @@ export const Auth: VFC = memo(() => {
         await dispatch(fetchAsyncLogin(data));
         await dispatch(fetchAsyncCreateProf());
         await navigate("/");
-      } 
+      }
     }
   };
   const toggleIsLogin = () => setIsLoginMode(!isLoginMode);
@@ -98,6 +100,7 @@ export const Auth: VFC = memo(() => {
                   _hover={{ bg: "blue.500" }}
                   boxShadow="md"
                 >
+                  <Icon as={RiLoginBoxLine} mr="1" />
                   Submit
                 </Button>
               </Stack>

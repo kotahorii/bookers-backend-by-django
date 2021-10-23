@@ -24,6 +24,8 @@ import { useQueryBooks } from "../../../hooks/book/useQueryBooks";
 import { EditBookModal } from "./EditBookModal";
 import { useQueryProfs } from "../../../hooks/auth/useQueryProfs";
 import { setId } from "../../../features/idSlice";
+import { AiTwotoneSetting } from "react-icons/ai";
+import { IoMdCreate } from "react-icons/io";
 
 export const SideBar: VFC = memo(() => {
   const [file, setFile] = useState<File | null>(null);
@@ -149,6 +151,7 @@ export const SideBar: VFC = memo(() => {
               bg="gray.300"
               _hover={{ bg: "gray.400" }}
             >
+              <Icon as={AiTwotoneSetting} mr="1" />
               Edit Prof
             </Button>
           </Stack>
@@ -186,9 +189,10 @@ export const SideBar: VFC = memo(() => {
                   type="submit"
                   isLoading={isSubmitting}
                   color="white"
-                  bg="blue.400"
-                  _hover={{ bg: "blue.500" }}
+                  bg="teal.400"
+                  _hover={{ bg: "teal.500" }}
                 >
+                  <Icon as={IoMdCreate} mr="1" />
                   Create
                 </Button>
               </Stack>
