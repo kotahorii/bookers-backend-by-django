@@ -1,5 +1,5 @@
 import { Stack } from "@chakra-ui/react";
-import { Flex, Text } from "@chakra-ui/layout";
+import { Text } from "@chakra-ui/layout";
 import { Link } from "react-router-dom";
 import { VFC, memo } from "react";
 import { useNavigate } from "react-router";

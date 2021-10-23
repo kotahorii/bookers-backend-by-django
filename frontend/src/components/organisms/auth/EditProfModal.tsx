@@ -27,12 +27,13 @@ import { useQueryMyProf } from "../../../hooks/auth/useQueryMyProf";
 import { useNavigate } from "react-router";
 
 export const EditProfModal: VFC = memo(() => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [profImg, setProfImg] = useState<File | null>(null);
   const { refetch } = useQueryMyProf();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const editedProf = useAppSelector(selectEditedProf);
   const isOpenProfEditModal = useAppSelector(selectIsOpenProfEditModal);
-  const [profImg, setProfImg] = useState<File | null>(null);
   const toast = useToast();
 
   const handlerInputProf = () => {
@@ -46,6 +47,7 @@ export const EditProfModal: VFC = memo(() => {
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    await setIsLoading(true);
     const res = await dispatch(
       fetchAsyncUpdateProf({
         id: editedProf.id,
@@ -54,6 +56,7 @@ export const EditProfModal: VFC = memo(() => {
       })
     );
     if (fetchAsyncUpdateProf.fulfilled.match(res)) {
+      setIsLoading(false);
       dispatch(resetEditProf());
       setProfImg(null);
       dispatch(resetIsOpenEditModal());
@@ -120,6 +123,7 @@ export const EditProfModal: VFC = memo(() => {
                     <Text textAlign="center">{profImg?.name}</Text>
                   </Stack>
                   <Button
+                    isLoading={isLoading}
                     type="submit"
                     bg="blue.400"
                     color="white"

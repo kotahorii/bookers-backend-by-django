@@ -27,6 +27,7 @@ import { useQueryBooks } from "../../../hooks/book/useQueryBooks";
 import { useNavigate } from "react-router";
 
 export const EditBookModal: VFC = memo(() => {
+  const [isLoading, setIsLoading] = useState(false);
   const [image, setImage] = useState<File | null>(null);
   const navigate = useNavigate();
   const { refetch } = useQueryBooks();
@@ -49,6 +50,7 @@ export const EditBookModal: VFC = memo(() => {
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    await setIsLoading(true);
     const res = await dispatch(
       fetchAsyncUpdateBook({
         id: editedBook.id,
@@ -58,6 +60,7 @@ export const EditBookModal: VFC = memo(() => {
       })
     );
     if (fetchAsyncUpdateBook.fulfilled.match(res)) {
+      setIsLoading(false);
       dispatch(resetEditedBook());
       setImage(null);
       dispatch(closeEditedModal());
@@ -134,6 +137,7 @@ export const EditBookModal: VFC = memo(() => {
                     </Stack>
                   </Stack>
                   <Button
+                    isLoading={isLoading}
                     type="submit"
                     bg="blue.400"
                     color="white"

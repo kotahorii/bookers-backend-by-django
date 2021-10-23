@@ -11,7 +11,10 @@ import * as yup from "yup";
 import { FormInputBook } from "../../../types/bookTypes";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAppDispatch } from "../../../app/hooks";
-import { setEditProf, setIsOpenEditModal } from "../../../features/auth/authSlice";
+import {
+  setEditProf,
+  setIsOpenEditModal,
+} from "../../../features/auth/authSlice";
 import { EditProfModal } from "../auth/EditProfModal";
 import { useQueryMyProf } from "../../../hooks/auth/useQueryMyProf";
 import { fetchAsyncNewBook } from "../../../features/books/bookSlice";
@@ -20,6 +23,7 @@ import { useNavigate } from "react-router";
 import { useQueryBooks } from "../../../hooks/book/useQueryBooks";
 import { EditBookModal } from "./EditBookModal";
 import { useQueryProfs } from "../../../hooks/auth/useQueryProfs";
+import { setId } from "../../../features/idSlice";
 
 export const SideBar: VFC = memo(() => {
   const [file, setFile] = useState<File | null>(null);
@@ -97,6 +101,13 @@ export const SideBar: VFC = memo(() => {
     }
   };
 
+  const searchMyBook = () => {
+    if (selectedProf === myprof && myprof) {
+      dispatch(setId(myprof.user_profile));
+      navigate(`/books/${myprof.user_profile}`);
+    }
+  };
+
   return (
     <>
       <Stack flex="1" spacing={{ base: 5, md: 10 }} h="100vh">
@@ -106,6 +117,7 @@ export const SideBar: VFC = memo(() => {
         <Stack px="5">
           <Stack
             cursor="pointer"
+            onClick={searchMyBook}
             _hover={{ bg: "gray.100" }}
             direction="row"
             align="center"
@@ -131,6 +143,7 @@ export const SideBar: VFC = memo(() => {
             </Text>
             <Button
               boxShadow="md"
+              _focus={{ boxShadow: "none" }}
               onClick={openEditProfModal}
               color="white"
               bg="gray.300"
