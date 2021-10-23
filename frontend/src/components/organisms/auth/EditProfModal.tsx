@@ -85,6 +85,8 @@ export const EditProfModal: VFC = memo(() => {
   return (
     <>
       <Modal
+        isCentered
+        motionPreset="slideInBottom"
         isOpen={isOpenProfEditModal}
         onClose={() => dispatch(resetIsOpenEditModal())}
       >

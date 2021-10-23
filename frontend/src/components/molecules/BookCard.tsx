@@ -104,7 +104,7 @@ export const BookCard: VFC<Props> = memo(({ book }) => {
                 maxH="100px"
                 borderRadius="lg"
               />
-              <Text fontSize="14px" color="gray.500">
+              <Text fontSize="xs" color="gray.500">
                 Created At: {book.created_at}
               </Text>
               <Button

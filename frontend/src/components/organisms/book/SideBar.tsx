@@ -166,7 +166,7 @@ export const SideBar: VFC = memo(() => {
             <Text color="pink.400">{errors.body?.message}</Text>
             <form onSubmit={handleSubmit(onSubmit)}>
               <Stack>
-                <Stack direction="row" mb="3">
+                <Stack direction="row" mb="3" spacing="5">
                   <input
                     accept=".png, .jpg, 'jpeg"
                     type="file"
@@ -182,7 +182,9 @@ export const SideBar: VFC = memo(() => {
                     color="gray.500"
                     _hover={{ color: "gray.600" }}
                   />
-                  <Text textAlign="center">{file?.name}</Text>
+                  <Text textAlign="center" color="gray.500">
+                    {file?.name}
+                  </Text>
                 </Stack>
                 <Button
                   boxShadow="lg"
